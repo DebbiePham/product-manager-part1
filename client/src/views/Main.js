@@ -7,7 +7,12 @@ const Main = () => {
     const [products, setProducts] = useState([]);
     const [loaded, setLoaded] = useState(false);
 
-
+    const deleteProduct = (id) => {
+        axios
+            .delete(`http://localhost:8000/api/products/${id}`)
+            .then(setLoaded(!loaded))
+            .catch((err) => console.log(err))
+    };
 
     const fetchProducts = () => {
         axios
@@ -25,7 +30,7 @@ const Main = () => {
         <div>
             <ProductForm />
             <hr />
-            <ProductList products={products} />
+            <ProductList products={products} deleteProduct={deleteProduct} />
         </div>
     );
 };

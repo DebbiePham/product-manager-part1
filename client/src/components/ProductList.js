@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom';
 import React from 'react';
     
 const ProductList = (props) => {
-    
+    const {deleteProduct} = props;
+
     return (
         <div class="container">
             <div className='card showdow text-center'>
@@ -15,6 +16,7 @@ const ProductList = (props) => {
                         return (
                             <p key={index}>
                                 <Link to={`/products/${product._id}`}>{product.title}</Link>
+                                <button onClick={() => deleteProduct(product._id)} className='btn btn-danger m-3'>Delete</button>
                             </p>
                         );
                     })}
