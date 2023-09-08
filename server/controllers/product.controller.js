@@ -10,7 +10,7 @@ module.exports.findAllProducts = (req, res) => {
         });
 }
 
-module.exports.findOneSingleProduct = (req, res) => {
+module.exports.findOneProduct = (req, res) => {
     Product.findOne({ _id: req.params.id })
         .then(oneSingleProduct => {
             res.json({ product: oneSingleProduct })
