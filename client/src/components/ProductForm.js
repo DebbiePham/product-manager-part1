@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import axios from 'axios';
 
 
-   
 const ProductForm = ()  => {
     //keep track of what is being typed via useState hook
     const [title, setTitle] = useState(""); 

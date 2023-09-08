@@ -8,25 +8,24 @@ const Main = () => {
     const [loaded, setLoaded] = useState(false);
 
 
+
     const fetchProducts = () => {
         axios
             .get("http://localhost:8000/api/products")
             .then((res) => {
                 setProducts(res.data.products);
-                setLoaded(true);
+                setLoaded(!loaded);
             })
             .catch((err) => console.error(err));
     };
 
-    useEffect(() => {
-        fetchProducts();
-    }, []); // Pass an empty dependency array to run the effect one 
+    useEffect(fetchProducts, [loaded]); // Pass an empty dependency array to run the effect one 
 
     return (
         <div>
-            <ProductForm fetchProducts={fetchProducts}/>
+            <ProductForm />
             <hr />
-            {loaded && <ProductList products={products} />}
+            <ProductList products={products} />
         </div>
     );
 };

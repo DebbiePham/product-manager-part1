@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import { useParams, useNavigate } from "react-router-dom";
+import { Link } from 'react-router-dom';
     
 const Detail = () => {
     const [product, setProduct] = useState({})
@@ -13,6 +14,15 @@ const Detail = () => {
             .then(res => setProduct(res.data.product))
             .catch(err => console.error(err));
     }, []);
+
+    const deleteProduct = (id) => {
+        axios
+            .delete(`http://localhost:8000/api/products/${id}`)
+            .then((res) => {
+                navigate('/');
+            })
+            .catch((err) => console.log(err))
+    };
     
     return (
         <div className='container p-5'>
@@ -26,7 +36,9 @@ const Detail = () => {
                     <p><span className='fw-bold'>Description: </span>{product.description}</p>
                 </div>
                 <div className='card-footer text-start'>
-                    <button className='btn btn-success' onClick={() => navigate(-1)}>Back</button>
+                    <Link to ={"/"} className='btn btn-success m-2'> Back Home </Link>
+                    <Link to={"/products/" + product._id + "/edit"} className='btn btn-warning m-2'>Edit</Link>
+                    <button className='btn btn-danger m-2' onClick={() => deleteProduct(product._id)}>Delete</button>
                 </div>
             </div>
         </div>
